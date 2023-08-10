@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Gatinho</title>
+    <link rel="stylesheet" href="p_style.css">
+    <link rel="icon" type="image/png" href="mdi_cat.png">
+</head>
+<body>
+    <nav class="navbar">       
+        <ul>
+            <li><a class="logo" href="#"><img class="logo" src="Adote Aqui!.png" alt="Logo"></a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Adotar</a></li>
+            <li><a href="cadastro_gato.html">Colocar para Adoção</a></li>
+            <li><a href="perdido.html">Perdidos</a></li>
+            <li class="login-icon">
+                <a href="cadastro.html"><img class="perfil" src="user-solid.svg" alt="perfil"></a>
+            </li>
+            <li class="search-bar">
+                <input class="search-barra" type="text" placeholder="Pesquisar">
+                <a class="icon-pesquisar-a" href=""><img class="icon-pesquisar" src="magnifying-glass-solid.svg" alt=""></a>
+            </li>
+        </ul>
+    </nav>
+    <div class="perfil-pai">
+        <div class="perfil-gato">
+            <!-- Aqui os detalhes do gatinho serão exibidos dinamicamente -->
+        </div>
+    </div>
+
+    <script>
+        // Certifique-se de que os gatinhosCadastrados estejam disponíveis nesta página
+        const gatinhosCadastrados = JSON.parse(localStorage.getItem("gatinhosCadastrados")) || [];
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const gatinhoId = urlParams.get("id");
+        const gatinho = gatinhosCadastrados.find(g => g.id == gatinhoId);
+    
+        if (gatinho) {
+            const perfilGatinho = document.querySelector(".perfil-gato");
+            perfilGatinho.innerHTML = `
+                <div class="foto-perfil">
+                    <img class="foto" src="data:image/png;base64,${gatinho.foto}" alt="Foto do gato">
+                </div>
+                <div class="info-perfil">
+                    <h1><strong>${gatinho.nome}</strong></h1>
+                    <br>
+                    <p><strong>Idade:</strong> ${gatinho.dtNascimento}</p>
+                    <br>
+                    <p><strong>Raça:</strong> ${gatinho.raca}</p>
+                    <br>
+                    <p><strong>Possui necessidades especiais:</strong> ${gatinho.necessidade}</p>
+                    <br>
+                    <p><strong>Endereço:</strong> ${gatinho.endereco}</p>
+                    <br>
+                    <p><strong>Sobre:</strong> ${gatinho.descricao}</p>
+                    <br> <br>
+                    <div class="buttons">
+                        <button class="adopt-button"><strong><a href="">Adotar</a></strong></button>
+                    </div>
+                </div>
+            `;
+        } else {
+            const perfilGatinho = document.querySelector(".perfil-gato");
+            perfilGatinho.innerHTML = `<p>Gatinho não encontrado.</p>`;
+        }
+    </script>
+    
+
+
+   

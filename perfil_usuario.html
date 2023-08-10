@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <link rel="stylesheet" href="perfil_usuario.css">
+    <link rel="icon" type="image/png" href="mdi_cat.png">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a class="logo" href="#"><img class="logo" src="Adote Aqui!.png" alt="Logo"></a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Adotar</a></li>
+            <li><a href="cadastro_gato.html">Colocar para Adoção</a></li>
+            <li><a href="perdido.html">Perdidos</a></li>
+            <li class="login-icon">
+                <a href="#"><img class="perfil" src="user-solid.svg" alt="perfil"></a>
+            </li>
+            
+        </ul>
+    </nav>
+    <div class="perfil-pai">
+        <div class="perfil-usuario">
+            <div class="foto-perfil">
+                <img class="foto" id="fotoPerfil" src="user-profile.jpg" alt="Foto do usuário">
+            </div>
+            
+            <div class="info-usuario" id="infoUsuario">
+                <!-- Informações do usuário serão preenchidas aqui dinamicamente -->
+            </div>
+            <div class="mensagem-adocao">
+                <button class="mensagem-button" onclick="abrirMensagens()">
+                    <img class="mensagem-icon" src="carta.png" alt="Ícone de Carta">
+                </button>
+            </div>
+            <div class="deslogar-button">
+                <button class="deslogar-button" onclick="deslogar()"><strong>Sair</strong></button>
+            </div>
+        </div>
+    </div>
+    <div class="gatinhos-associados">
+        <h2>Gatinhos Associados</h2>
+        <div class="gatinhos-lista" id="gatinhosLista">
+            <!-- Gatinhos list will be filled here dynamically -->
+        </div>
+    </div>
+    <div class="animais-perdidos">
+        <h2>Animais Perdidos</h2>
+        <div class="perdidos-lista" id="perdidosLista">
+            <!-- Animais perdidos list will be filled here dynamically -->
+        </div>
+    </div>
+    <div class="perdido-card" data-id="${gatinho.id}">
+        <!-- ... conteúdo do card ... -->
+    </div>
+    <script>
+        
+        const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+        const gatinhosPerdidos = JSON.parse(localStorage.getItem("gatinhosPerdidos")) || [];
+        const gatinhosAssociados = JSON.parse(localStorage.getItem("gatinhosCadastrados")) || [];
+        const gatinhosLista = document.getElementById("gatinhosLista");
+        
+        if (usuarioLogado) {
+            const infoUsuario = document.getElementById("infoUsuario");
+            const fotoPerfil = document.getElementById("fotoPerfil");
+        
+            infoUsuario.innerHTML = `
+                <h1>Perfil de <strong>${usuarioLogado.nome}</strong></h1>
+                <p><strong>Email:</strong> ${usuarioLogado.email}</p>
+                <p><strong>Telefone:</strong> ${usuarioLogado.telefone}</p>
+                <p><strong>Endereço:</strong> ${usuarioLogado.endereco}</p>
+            `;
+        
+            if (usuarioLogado.foto) {
+                fotoPerfil.src = usuarioLogado.foto;
+            }}
+
+            function exibirAnimaisPerdidos() {
+        const animaisPerdidosDoUsuario = gatinhosPerdidos.filter(gatinho => gatinho.usuario === usuarioLogado.nome);
+
+        animaisPerdidosDoUsuario.forEach(gatinho => {
+            const perdidoCard = criarPerdidoCard(gatinho);
+            perdidosLista.appendChild(perdidoCard);
+        });
+    }
+
+    function criarPerdidoCard(gatinho) {
+        const perdidoCard = document.createElement("div");
+        perdidoCard.classList.add("perdido-card");
+        perdidoCard.innerHTML = `
+            <div class="perdido-foto">
+                <img src="data:image/png;base64,${gatinho.foto}" alt="Foto do Animal Perdido">
+            </div>
+            <div class="perdido-info">
+                <h3>${gatinho.nome}</h3>
+                <p><strong>Tipo:</strong> ${gatinho.tipoAnimal}</p>
+                <p><strong>Raça:</strong> ${gatinho.raca}</p>
+                <p><strong>Endereço:</strong> ${gatinho.endereco}</p>
+                <p><strong>Sexo:</strong> ${gatinho.sexo}</p>
+                <button class="excluir-button" onclick="excluirGatinhoPerdido(event, ${gatinho.id})">Excluir</button>
+            </div>
+            
+        `;
+        return perdidoCard;
+    }
+
+    exibirAnimaisPerdidos();
+        
+            const gatinhosDoUsuario = gatinhosAssociados.filter(gatinho => gatinho.usuario === usuarioLogado.nome);
+        
+            gatinhosDoUsuario.forEach(gatinho => {
+    if (gatinho.usuario === usuarioLogado.nome) {
+        const gatinhoCard = document.createElement("div");
+        gatinhoCard.classList.add("gatinho-card");
+        gatinhoCard.innerHTML = `
+            <div class="gatinho-foto">
+                <a href="perfil_gatinho.html?id=${gatinho.id}">
+                    <img src="data:image/png;base64,${gatinho.foto}" alt="Imagem do Gatinho">
+                </a>
+            </div>
+            <div class="gatinho-info">
+                <h3>${gatinho.nome}</h3>
+                <p><strong>Sexo:</strong> ${gatinho.sexo}</p>
+                <p><strong>Idade:</strong> ${gatinho.dtNascimento}</p>
+                <p><strong>Necessidade:</strong> ${gatinho.necessidade}</p>
+                <p><strong>Bairro:</strong> ${gatinho.endereco}</p>
+                <button class="excluir-button" onclick="excluirGatinho(event, ${gatinho.id})">Excluir</button>
+            </div>
+        `;
+        gatinhosLista.appendChild(gatinhoCard);
+    }
+});
+
+function excluirGatinho(event, id) {
+    event.stopPropagation(); // Evita a propagação do evento de clique para o link
+    const novoGatinhosAssociados = gatinhosAssociados.filter(gatinho => gatinho.id !== id);
+    localStorage.setItem("gatinhosCadastrados", JSON.stringify(novoGatinhosAssociados));
+
+    // Atualize a exibição da lista de gatinhos no perfil do tutor
+    gatinhosLista.innerHTML = ""; // Limpa o conteúdo atual
+    novoGatinhosAssociados.forEach(gatinho => {
+        if (gatinho.usuario === usuarioLogado.nome) {
+            const gatinhoCard = document.createElement("div");
+            gatinhoCard.classList.add("gatinho-card");
+            gatinhoCard.innerHTML = `
+                <div class="gatinho-foto">
+                    <a href="perfil_gatinho.html?id=${gatinho.id}">
+                        <img src="data:image/png;base64,${gatinho.foto}" alt="Imagem do Gatinho">
+                    </a>
+                </div>
+                <div class="gatinho-info">
+                    <h3>${gatinho.nome}</h3>
+                    <p><strong>Sexo:</strong> ${gatinho.sexo}</p>
+                    <p><strong>Idade:</strong> ${gatinho.dtNascimento}</p>
+                    <p><strong>Necessidade:</strong> ${gatinho.necessidade}</p>
+                    <p><strong>Bairro:</strong> ${gatinho.endereco}</p>
+                    <button class="excluir-button" onclick="excluirGatinho(event, ${gatinho.id})">Excluir</button>
+                </div>
+            `;
+            gatinhosLista.appendChild(gatinhoCard);
+        }
+    });
+
+    alert("Gatinho excluído com sucesso.");
+}
+
+function excluirGatinhoPerdido(event, id) {
+    event.stopPropagation();
+
+    const novoGatinhosPerdidos = gatinhosPerdidos.filter(gatinho => gatinho.id !== id);
+    localStorage.setItem("gatinhosPerdidos", JSON.stringify(novoGatinhosPerdidos));
+
+    // Remove o card da página perfil_usuario.html
+    const cardExcluidoPerfilUsuario = document.querySelector(`.perdido-card[data-id="${id}"]`);
+    if (cardExcluidoPerfilUsuario) {
+        cardExcluidoPerfilUsuario.remove();
+    }
+
+    // Atualize a exibição dos animais perdidos na página perdido.html
+    const perdidosLista = document.getElementById("perdidosLista");
+    perdidosLista.innerHTML = ""; // Limpa o conteúdo atual
+    novoGatinhosPerdidos.forEach(gatinho => {
+        const perdidoCard = criarPerdidoCard(gatinho);
+        perdidosLista.appendChild(perdidoCard);
+    });
+
+    alert("Teste.");
+}
+
+
+
+
+    
+
+
+        function abrirMensagens() {
+        // Adicione aqui a lógica para abrir a página de mensagens de adoção
+        // ou exibir uma lista de mensagens relacionadas aos gatinhos do usuário.
+        }
+
+        function deslogar() {
+            localStorage.removeItem("usuarioLogado");
+            alert("Você foi deslogado com sucesso.");
+            location.reload(); // Recarrega a página para atualizar o menu
+        }
+    </script>
+    </body>
+    </html>    

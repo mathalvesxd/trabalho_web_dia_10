@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perdidos</title>
+    <link rel="icon" type="image/png" href="mdi_cat.png">
+    <link rel="stylesheet" href="perdido.css">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a class="logo" href="#"><img src="Adote Aqui!.png" alt="Logo"></a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Adotar</a></li>
+            <li><a href="cadastro_gato.html">Colocar para Adoção</a></li>
+            <li><a href="perdido.html">Perdidos</a></li>
+            <li class="login-icon">
+                <a href="login.html"><img class="perfil" src="user-solid.svg" alt="perfil"></a>
+            </li>
+            <li class="search-bar">
+                <input class="search-barra" type="text" placeholder="Pesquisar">
+                <a class="icon-pesquisar-a" href=""><img class="icon-pesquisar" src="magnifying-glass-solid.svg" alt=""></a>
+            </li>
+        </ul>
+    </div>
+    <div class="posts" id="postsContainer">
+        <!-- Os posts de gatos perdidos serão exibidos aqui -->
+    </div>
+    <div class="perdido-card" data-id="${gatinho.id}">
+        <!-- ... (conteúdo do card) ... -->
+    </div>
+
+    <script>
+        // Função para exibir os posts de gatos perdidos
+        function exibirGatosPerdidos() {
+    const postsContainer = document.getElementById("postsContainer");
+    const gatinhosPerdidos = JSON.parse(localStorage.getItem("gatinhosPerdidos")) || [];
+
+    // Limpa o conteúdo atual
+    postsContainer.innerHTML = "";
+
+    // Itera sobre os gatinhos perdidos e cria os posts
+    gatinhosPerdidos.forEach(gatinho => {
+    const post = document.createElement("div");
+    post.classList.add("post");
+
+    post.innerHTML = `
+        <a>${gatinho.nome}</a>
+        <img class="cat" src="data:image/png;base64,${gatinho.foto}" alt="Foto do Gatinho">
+        <h5 class="situacao perdido">Perdido</h5>
+        <input class="chat" type="text" name="chat" id="" placeholder="Informações">
+        <button class="find" style="background-color: red;">Encontrei</button>
+    `;
+
+    postsContainer.appendChild(post);
+});
+}
+    
+        // Chama a função para exibir os posts de gatos perdidos
+        exibirGatosPerdidos();
+    </script>
+
+    
+</body>
+</html>

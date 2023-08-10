@@ -1,0 +1,332 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background: #BCECFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    background: #FFFAA3;
+    align-items: center;
+    align-content: center;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background: #555;
+    color: white;
+}
+
+.navbar .logo {
+    float: left;
+    margin-right: 5px;
+    padding: 0px 0px;
+}
+
+.navbar .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .login-icon {
+    float: right;
+    margin-right: 20px;
+}
+
+.perfil{
+    width: 25px;
+    height: 16px;
+}
+
+.perfil:hover {
+    color: white;
+    background: #555;
+}
+
+.search-barra {
+    margin-top: 12px;
+    margin-right: 35px;
+    padding: 3px 25px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.75);
+}
+
+.icon-pesquisar {
+    height: 20px;
+    width: 20px;
+    display: none;
+}
+
+.search-bar {
+    height: 32px;
+}
+@media (max-width: 780px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        margin: 0;
+        padding: 20px;
+        width: 35%;
+        height: 100%;
+        transform: translateX(-95%);
+    }
+
+    .navbar:hover {
+        transform: translateX(0%);
+    }
+
+    .search-barra {
+        display: none;
+    }
+
+    .icon-pesquisar {
+        display: block;
+    }}
+
+.perfil-pai {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40vh;
+        background-color: #BCECFF;
+    }
+    
+.perfil-usuario {
+        display: flex;
+        flex-direction: row;
+        background-color: #f8f8f8;
+        align-items: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        width: 80%;
+        max-width: 800px;
+        margin: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+.foto-perfil {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px; /* Ajuste o tamanho da imagem de perfil conforme necessário */
+        height: 200px; /* Ajuste o tamanho da imagem de perfil conforme necessário */
+        overflow: hidden;
+        border-radius: 50%;
+        margin-right: 20px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+.foto {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
+.info-usuario {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        flex: 1;
+    }
+    
+.deslogar-button {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+    
+.deslogar-button button {
+        background-color: #FFA07A;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+    }
+    
+.deslogar-button button:hover {
+        background-color: #FF7F50;
+        cursor: pointer;
+    }
+    
+@media (max-width: 780px) {
+        /* ... Estilos para tela pequena ... */
+    }    
+
+.gatinhos-associados {
+        background-color: #f8f8f8;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        
+    }
+    
+.gatinhos-associados h2 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+    
+.gatinhos-lista {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+    
+.gatinho-card {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        flex: 1;
+        min-width: 250px;
+        padding: 10px;
+        flex: calc(50% - 20px);
+        max-width: 300px;
+    }
+    
+.gatinho-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 50px;
+    }
+    
+.gatinho-card h3 {
+        margin-top: 10px;
+        font-size: 1.2rem;
+    }    
+.acoes-botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+}
+
+.mensagem-button{
+    background-color: white;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.deslogar-button button {
+    background-color: #FFA07A;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mensagem-button:hover{
+    background-color: #f8f8f8;
+}
+.deslogar-button button:hover {
+    background-color: #FF7F50;
+}
+
+.mensagem-icon {
+    width: 70px;
+    height: 70px;
+    margin-right: 2px; /* Ajuste o valor da margem direita conforme necessário */
+}
+.animais-perdidos {
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.animais-perdidos h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.perdidos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.perdido-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+    flex: calc(50% - 20px);
+    max-width: 300px;
+}
+
+.perdido-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50px;
+}
+
+.perdido-card h3 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.perdido-card .acoes-botoes,
+.gatinho-card .acoes-botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.perdido-card button,
+.gatinho-card button {
+    background-color: #FFA07A;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.perdido-card button:hover,
+.gatinho-card button:hover {
+    background-color: #FF7F50;
+}
